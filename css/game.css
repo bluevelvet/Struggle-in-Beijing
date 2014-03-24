@@ -1,0 +1,363 @@
+html {
+	overflow:hidden;
+}
+body {
+     font-family: helvetica, arial;
+     background-color: #000000;
+     color: #a3b3c3;
+     border:0;
+     padding:0;
+     margin:0;
+     font-size:11px;
+     overflow:hidden;
+     width: 320px;
+     margin: auto;
+}
+h1 {
+	margin:0;
+	margin-left:.5em;
+}
+
+h2 {
+	margin:.4em;
+}
+
+h3 {
+	font-size:13px;
+	margin:12px;
+	padding-left:0;margin-bottom:.5em;
+	color: #ffffff;
+}
+
+p {
+	margin:0;
+	margin:12px;
+	margin-top:.5em;
+	margin-bottom:.5em;
+}
+
+a {
+	color: #ffffff;
+}
+
+
+td {
+	text-align:center;
+	font-size: 10px;
+}
+
+img {
+	border:0;
+}
+
+.ibox {
+	width:320px;
+	height:315px;
+	overflow:hidden;
+	background-color: #aaaaaa;
+	margin:auto;
+}
+
+.iboxcontent {
+	width:320px;
+	height:245px;
+	float:left;
+	overflow:hidden;
+}
+
+.fontostext {
+	color: #ffffff;
+}
+.status {
+	width:130px;
+	height:18px;
+	float:left;
+	overflow:hidden;
+	margin:1px 5px;
+}
+.status_small {
+	width:70px;
+	height:18px;
+	float:left;
+	overflow:hidden;
+	margin:1px 5px;
+}
+
+.status div {
+	float:left;
+	font-weight:bold;
+	color:#ffffff;
+	font-size: 13px;
+}
+
+.status_small div {
+	float:left;
+	font-weight:bold;
+	color:#ffffff;
+	font-size: 13px;
+}
+#market_table {
+	width:150px;
+	height:216px;
+	color:#ffffff;
+	float:left;
+}
+.goods_table {
+	width:140px;
+	height:216px;
+	float:left;
+	margin:2px 5px;
+	background-image:url(../i/goods.png);
+}
+.goods {
+	width:130px;
+	height:20px;
+	float:left;
+	overflow:hidden;
+	margin:3px;
+}
+#depot_table {
+	width:150px;
+	height:220px;
+	color:#ffffff;
+	float:left;
+}
+#depot_table div{
+	float:left;
+}
+.dbg1{
+	width:100px;
+	height:18px;
+	margin:0px 2px;
+	background-image:url(../i/digit_bg_big.png);
+}
+.dbg2{
+	width:30px;
+	height:18px;
+	margin:0px 2px;
+	background-image:url(../i/digit_bg_small.png);
+}
+
+.status_digit_small {
+	width:100px;
+	height:18px;
+	margin:0px 2px;
+	text-align:right;
+	font-weight:bold;
+	color:#ffffff;
+	font-size: 11px;
+	background-image:url(../i/digit_bg_big.png);
+}
+
+
+#place_contents {
+	width:10000px;
+}
+#player_contents {
+	width:320px;
+}
+
+
+#container {
+	width:320px;
+}
+
+#alertbox {
+	display:none;position:absolute;
+	z-index:200;
+}
+
+#alertbox_board{
+	position:absolute;
+	width:320px;
+	height: 356px;
+	background-color:#000000;
+	opacity: .8;
+}
+
+#alertbox_content {
+	position:absolute;
+	width:320px;
+	height:256px;
+	margin-top:70px;
+	text-align:center;
+	color:#ffffff;
+}
+
+#alertbox_content .fontostext {
+	color:#a3b3c3;
+}
+
+#alertbox a {
+	margin:10px;
+	width:114px;
+	height:54px;
+}
+
+#logo {
+	float:right;
+	padding:10px;
+}
+
+#places_menu {
+	width:320px;height:41px;
+	margin:auto;
+	text-align:center;
+	background-image:url(../i/places.png);
+	background-position:0 0px;
+}
+
+#player_status {
+	width:225px;
+	height:60px;
+	margin:2px 7px;
+	background-image:url(../i/status.png);
+}
+
+#next_day {
+	width:65px;
+	height:60px;
+	margin:2px 7px;
+	background-image:url(../i/next_day.png);
+}
+
+#places_menu a {
+	height:41px;
+	display:block;
+	float:left;
+	overflow:hidden;
+}
+
+#places_menu a span {
+	height:41px;
+	display:block;
+	background-image:url(../i/places.png)
+}
+
+#places_menu #button_market span {
+	width:80px;
+	background-position: 0 0;
+}
+#places_menu #button_bank span {
+	width:80px;
+	background-position: -80px 0; 
+}
+#places_menu #button_society span {
+	width:80px;
+	background-position: -160px 0px;
+}
+#places_menu #button_netbar span {
+	width:80px;
+	background-position: -240px 0px;
+}
+/*
+#places_menu a:hover {
+	opacity: .5;
+}
+*/
+
+#score.highscore {
+	color: #ff4444;
+}
+ 
+
+#button_xwuz {
+	position:absolute;
+	display:block;
+	width:45px;
+	height:57px;
+	margin: 5px 0 0 267px;
+	background-image:url(../i/xwuz.png);z-index:1;
+	cursor:pointer;
+}
+
+
+#yourbest {
+	text-align:center;
+	font-weight:bold;
+	color:#ffffff;font-size: 45px;
+	margin: .5em auto .5em auto;
+	background-image:url(../i/flekk.png);
+	width:296px;
+	height:65px;
+	padding-top:15px;
+}
+
+
+#preload {
+	width:320px;position:absolute;
+	visibility:hidden;
+	overflow:hidden;
+}
+
+#table_about {
+	margin-top: 10px;
+}
+
+#table_about img {
+	vertical-align:middle;
+}
+
+#scoretable {
+	width: 237px;
+	margin-left: 13px;
+	margin-top:10px;
+	font-size:12px;
+	height:17px;
+	overflow:hidden;
+}
+
+#scoretable div {
+	float:left;
+}
+
+#score, #combo, #level {
+	color:#ffffff;
+}
+
+#score {
+	width:2em;
+}
+
+#level {
+	width:1em;
+}
+
+#combo {
+	width:1.5em;
+}
+
+#levelp {
+	margin-left: 1.5em;
+}
+
+#combop {
+	float:right !important;
+}
+
+/* BUBBLE TROUBLE [ */
+#bt_realarea {
+	clear:both;
+	padding:0;
+	margin-left:11px;
+	margin-top:12px;
+	width:297px;
+	height:264px;
+	background-image: url(../i/bgch.png); 
+	position: relative; /* if it's not here, safari breaks bad */
+}
+
+.bubble {
+	position:absolute;
+	background-image: url(../i/b.png);
+	display: block;
+	width: 33px;
+	height: 33px;
+	opacity: 0;
+}
+
+/* ] BUBBLE TROUBLE */
+
+
+
+

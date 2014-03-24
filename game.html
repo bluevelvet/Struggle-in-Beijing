@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<head>
+	<title>新北京浮生记 by RenRen Company</title>
+	<meta name="viewport" content="width = 320,initial-scale=1,user-scalable=no" />
+	<meta name="description" content="您扮演到北京挣钱的小农民，期望在京的40天可以赚大钱娶媳妇，登上富豪榜。" />
+	<link rel="stylesheet" type="text/css" media="all" href="css/game.css" /> 
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="apple-touch-icon-precomposed" href="i/icon.png"/>
+	<link rel="apple-touch-startup-image" href="i/loader.png">
+	<script type="text/javascript" src="js/game_engine.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+	<div id="alertbox">
+		<div id="alertbox_board"></div>
+		<div id="alertbox_content"></div>
+	</div>
+
+	<div id="places_menu">
+		<a id="button_market" href="#market" onclick="return Game.places.set('market');"><span></span>黑市</a>
+		<a id="button_bank" href="#bank" onclick="return Game.places.set('bank');"><span></span>银行</a>
+		<a id="button_society" href="#society" onclick="return Game.places.set('society');"><span></span>社会</a>
+		<a id="button_netbar" href="#netbar" onclick="return Game.places.set('netbar');"><span></span>网吧</a>
+	</div>
+
+	<div class="ibox" id="stage">
+		<div id="place_contents">
+			<!--trading place//-->
+			<div id="ibox_market" class="iboxcontent">
+				<div id="market_table">
+					<div>今日黑市:</div>
+					<div class="goods_table" id="market_goods"></div>
+				</div>
+
+				<div id="depot_table">
+					<div>我的出租屋:&nbsp;</div>
+					<div id="depot">0/100</div>
+					<div class="goods_table" id="depot_goods"></div>
+				</div>
+			</div>
+
+			<!--money stuff//-->
+			<div id="ibox_bank" class="iboxcontent">
+				<h3>俺到了北京最大的银行...</h3>
+				<div id="bank_counter">
+					<div id="save_money" class="business"></div>
+					<div id="withdraw_money" class="business"></div>
+					<div id="repay_money" class="business"></div>
+					<div id="apply_loan" class="business"></div>
+				</div>
+			</div>
+
+			<!--buy health fame and house//-->
+			<div id="ibox_society" class="iboxcontent">
+				<h3>医院</h3>
+				<div id="hospital" class="business"></div>
+				<h3>慈善机构</h3>
+				<div id="charity" class="business"></div>
+				<h3>房子中介</h3>
+				<div id="broker" class="business"></div>
+			</div>
+		
+			<!--about us//-->
+			<div id="ibox_netbar" class="iboxcontent">
+				<h3>网吧不要钱！</h3>
+			</div>
+		</div>
+		<!--player status //-->
+		<div id="player_contents">
+			<div class="iboxcontent" id="player_status">
+				<div class="status" id="cash_info">
+					<div>现金</div>
+					<div class="dbg1" id="cash"></div>
+				</div>
+				<div class="status_small" id="health_info">
+					<div>健康</div>
+					<div class="dbg2" id="health"></div>
+				</div>
+				<div class="status" id="saving_info">
+					<div>存款</div>
+					<div class="dbg1" id="saving"></div>
+				</div>
+				<div class="status_small" id="fame_info">
+					<div >名声</div>
+					<div class="dbg2" id="fame"></div>
+				</div>
+				<div class="status" id="loan_info">
+					<div>欠款</div>
+					<div class="dbg1" id="loan"></div>
+				</div>
+			</div>
+
+			<div class="status" id="next_day" onclick="return Game.main.engine.newDay();">
+				<div>下一天</div>
+				<div id=day_info>0/40</div>
+			</div>
+		</div>
+
+
+	</div>
+	<script type="text/javascript">Game.main.init();</script>
+</div>
+</body>
+</html>
