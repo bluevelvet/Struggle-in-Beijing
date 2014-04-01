@@ -16,9 +16,42 @@
 <div id="container">
 
 	<div id="alertbox">
-		<div id="alertbox_board"></div>
+		<div class="alertbox_board"></div>
 		<div id="alertbox_content"></div>
 	</div>
+
+<!--
+	<div id="inputter" sytle="opacity=0">
+		<div id="inputter_content">
+			<input type="text" id="digital_content" style="width:160px; height:20px; color:#66ff33;"/>
+			<br>
+			<button class="inputter_button" onclick="input(this, 'add');">1</button>
+			<button class="inputter_button" onclick="input(this, 'add');">2</button>
+			<button class="inputter_button" onclick="input(this, 'add');">3</button>
+			<button class="inputter_button" onclick="input(this, 'mul');">50%</button>
+			<br>
+			<button class="inputter_button" onclick="input(this, 'add');">4</button>
+			<button class="inputter_button" onclick="input(this, 'add');">5</button>
+			<button class="inputter_button" onclick="input(this, 'add');">6</button>
+			<button class="inputter_button" onclick="input(this, 'mul');">25%</button>
+			<br>
+			<button class="inputter_button" onclick="input(this, 'add');">8</button>
+			<button class="inputter_button" onclick="input(this, 'add');">9</button>
+			<button class="inputter_button" onclick="input(this, 'add');">0</button>
+			<button class="inputter_button" onclick="input(this, 'inc');">+1</button>
+			<br>
+			<button class="inputter_button" onclick="input(this, 'clr');">C</button>
+			<button class="inputter_button" onclick="input(this, 'add');">0</button>
+			<button class="inputter_button" onclick="input(this, 'del');">&lt;</button>
+			<button class="inputter_button" onclick="input(this, 'dec');">-1</button>
+			<br>
+			<br>
+			<a href="#" onclick="Game.say.dismiss(); Game.flow.resume(); Game.main.engine.deal(); return false;"><img src="i/ok.png" alt="Yes" /></a>
+			<a href="#" onclick="Game.say.dismiss(); Game.flow.resume(); return false;"><img src="i/cancel.png" alt="Cancel" /></a>
+		</div>
+
+	</div>
+-->
 
 	<div id="places_menu">
 		<a id="button_market" href="#market" onclick="return Game.places.set('market');"><span></span>黑市</a>
@@ -38,35 +71,34 @@
 
 				<div id="depot_table">
 					<div>我的出租屋:&nbsp;</div>
-					<div id="depot">0/100</div>
+					<div id="depot"></div>
 					<div class="goods_table" id="depot_goods"></div>
 				</div>
 			</div>
 
 			<!--money stuff//-->
 			<div id="ibox_bank" class="iboxcontent">
-				<h3>俺到了北京最大的银行...</h3>
+				<h3 style="text-align:center;">俺到了北京最大的银行...</h3>
 				<div id="bank_counter">
-					<div id="save_money" class="business"></div>
-					<div id="withdraw_money" class="business"></div>
-					<div id="repay_money" class="business"></div>
-					<div id="apply_loan" class="business"></div>
+					<div id="save_money" class="business" onclick="Game.main.engine.bank('save');">存钱</div>
+					<div id="withdraw_money" class="business" onclick="Game.main.engine.bank('withdraw');">取钱</div>
+					<div id="repay_money" class="business" onclick="Game.main.engine.bank('repay');">还钱</div>
+					<div id="apply_loan" class="business" onclick="Game.main.engine.bank('loan');">借钱</div>
 				</div>
 			</div>
 
 			<!--buy health fame and house//-->
 			<div id="ibox_society" class="iboxcontent">
-				<h3>医院</h3>
-				<div id="hospital" class="business"></div>
-				<h3>慈善机构</h3>
-				<div id="charity" class="business"></div>
-				<h3>房子中介</h3>
-				<div id="broker" class="business"></div>
+				<h3 style="text-align:center">这个社会有点不友善...</h3>
+				<div id="hospital" class="business" onclick="Game.main.engine.society('cure');">医院</div>
+				<div id="charity" class="business" onclick="Game.main.engine.society('donate');">慈善机构</div>
+				<div id="broker" class="business" onclick="Game.main.engine.society('rent');">房子中介</div>
 			</div>
 		
 			<!--about us//-->
 			<div id="ibox_netbar" class="iboxcontent">
 				<h3>网吧不要钱！</h3>
+				<div id="best_score"></div>
 			</div>
 		</div>
 		<!--player status //-->
@@ -80,9 +112,9 @@
 					<div>健康</div>
 					<div class="dbg2" id="health"></div>
 				</div>
-				<div class="status" id="saving_info">
+				<div class="status" id="savings_info">
 					<div>存款</div>
-					<div class="dbg1" id="saving"></div>
+					<div class="dbg1" id="savings"></div>
 				</div>
 				<div class="status_small" id="fame_info">
 					<div >名声</div>
@@ -96,6 +128,7 @@
 
 			<div class="status" id="next_day" onclick="return Game.main.engine.newDay();">
 				<div>下一天</div>
+				<br><br>
 				<div id=day_info>0/40</div>
 			</div>
 		</div>

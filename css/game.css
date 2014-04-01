@@ -97,7 +97,6 @@ img {
 	font-size: 13px;
 }
 #market_table {
-	width:150px;
 	height:216px;
 	color:#ffffff;
 	float:left;
@@ -110,11 +109,10 @@ img {
 	background-image:url(../i/goods.png);
 }
 .goods {
-	width:130px;
 	height:20px;
-	float:left;
-	overflow:hidden;
-	margin:3px;
+	display:block;
+	position:absolute;
+	font-size:13px;
 }
 #depot_table {
 	width:150px;
@@ -163,11 +161,12 @@ img {
 }
 
 #alertbox {
-	display:none;position:absolute;
+	display:none;
+	position:absolute;
 	z-index:200;
 }
 
-#alertbox_board{
+.alertbox_board{
 	position:absolute;
 	width:320px;
 	height: 356px;
@@ -218,6 +217,7 @@ img {
 	width:65px;
 	height:60px;
 	margin:2px 7px;
+	text-align:center;
 	background-image:url(../i/next_day.png);
 }
 
@@ -335,7 +335,6 @@ img {
 	float:right !important;
 }
 
-/* BUBBLE TROUBLE [ */
 #bt_realarea {
 	clear:both;
 	padding:0;
@@ -356,8 +355,58 @@ img {
 	opacity: 0;
 }
 
-/* ] BUBBLE TROUBLE */
 
+.drag { position: relative; }
+.slider {
+	width:200px;
+	height:41px;
+	background-image:url(../i/sliderbg.png);
+}
 
+.digit_button {
+	width:40px;
+	height:40px;
+	background-image:url(../i/digit_button.png);
+}
 
+.inputter_button {
+	width:40px;
+	height:40px;
+}
 
+#digital_content {
+	width:160px;
+	height:20px;
+	color:#000000;
+	text-align:center;
+	font-size:17px;
+}
+
+#ibox_market {
+	position:relative;
+}
+
+.business {
+	font-size:36px;
+	color:#ffffff;
+	display:block;
+	cursor:pointer;
+	text-align:center;
+}
+#cash {
+	color:#00ff33;
+}
+#loan {
+	color:#ff0033;
+}
+#fame {
+	color:#33ccff;
+}
+#savings {
+	color:#00ff33;
+}
+#best_score{
+	color:#ffffff;
+	font-size: 24px;
+	text-align: center;
+}
