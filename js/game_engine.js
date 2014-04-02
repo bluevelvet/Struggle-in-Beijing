@@ -19,9 +19,16 @@ Game.say = function () {
 			document.getElementById('alertbox').style.display = 'block';
 			document.getElementById('alertbox_content').innerHTML = question +
 				'<br style="clear:both" /><br /><a href="#" onclick=' +
-				'"Game.say.dismiss(); Game.flow.restart();return false;">' +
+				'"Game.say.dismiss(); Game.flow.resume(); Game.main.init();return false;">' +
 				'<img src="/i/ok.png" alt="Yes" /></a><a href="#" onclick="Game.say.dismiss();' +
 				' Game.flow.resume(); return false;"><img src="/i/cancel.png" alt="Cancel" /></a>';
+		},
+		replay: function (question) {
+			Game.flow.pause();
+			document.getElementById('alertbox').style.display = 'block';
+			document.getElementById('alertbox_content').innerHTML = question +
+				'<br style="clear:both" /><br /><a href="#" onclick="Game.say.dismiss(); Game.main.init();return false;">' +
+				'<img src="/i/ok.png" alt="Yes" /></a>';
 		},
 		// buy or sell
 		deal: function (dealInfo) {
@@ -63,16 +70,16 @@ Game.say = function () {
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(4, &quot;add&quot, ' + dealInfo.maxAmount +');">4</button>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(5, &quot;add&quot, ' + dealInfo.maxAmount +');">5</button>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(6, &quot;add&quot, ' + dealInfo.maxAmount +');">6</button>' +
-				'<button class="inputter_button" onclick="Game.main.engine.inputter(0.25, &quot;mul&quot);">25%</button>' +
+				'<button class="inputter_button" onclick="Game.main.engine.inputter(0.33, &quot;mul&quot);">33%</button>' +
 				'<br>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(7, &quot;add&quot, ' + dealInfo.maxAmount +');">7</button>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(8, &quot;add&quot, ' + dealInfo.maxAmount +');">8</button>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(9, &quot;add&quot, ' + dealInfo.maxAmount +');">9</button>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(1, &quot;inc&quot, ' + dealInfo.maxAmount +');">+1</button>' +
 				'<br>' +
-				'<button class="inputter_button" onclick="Game.main.engine.inputter(7, &quot;clr&quot);">C</button>' +
-				'<button class="inputter_button" onclick="Game.main.engine.inputter(8, &quot;add&quot, ' + dealInfo.maxAmount +');">0</button>' +
-				'<button class="inputter_button" onclick="Game.main.engine.inputter(9, &quot;del&quot);">&lt;</button>' +
+				'<button class="inputter_button" onclick="Game.main.engine.inputter(0, &quot;clr&quot);">C</button>' +
+				'<button class="inputter_button" onclick="Game.main.engine.inputter(0, &quot;add&quot, ' + dealInfo.maxAmount +');">0</button>' +
+				'<button class="inputter_button" onclick="Game.main.engine.inputter(0, &quot;del&quot);">&lt;</button>' +
 				'<button class="inputter_button" onclick="Game.main.engine.inputter(1, &quot;dec&quot);">-1</button>' +
 				'<br><br>' +
 				'<a href="#" onclick="Game.main.engine.setDealAmount(document.getElementById(&quot;digital_content&quot;).value);' +
@@ -171,13 +178,6 @@ Game.places = function () {
 				return false;
 			}
 
-			/*
-			if (places[what].active && what === 'market') {
-				Game.say.confirm('<h1>New game</h1>Do you really want to<br />restart your game?');
-				return;
-			}
-			*/
-			
 			if (places[what].active) {
 				return false;
 			}
@@ -223,8 +223,7 @@ Game.main = function () {
 			Game.say.alert('<h1>新北京浮生记</h1><p style="margin: 0 20px 0 20px; text-align:left;">' +
 						'<img src="i/icon.png" alt="北京浮生记" style="width:64px; height:64px;float:left;' +
 						'margin-right:5px;"/>买卖货物在北京生存下去并发财，你会遇到各种各样的事情，体验北京生存的辛酸' +
-						'.准备好接受挑战了吗？</p>' +
-						'<div style="width:110px; margin:30px auto -30px auto;"></div>');
+						'.准备好接受挑战了吗？</p><div style="width:110px; margin:30px auto -30px auto;"></div>');
 			if(document.body.addEventListener) {
 				document.body.addEventListener("touchmove", function(e) {
 					e.preventDefault();
@@ -239,17 +238,15 @@ Game.main = function () {
 					return status;
 				}, 
 				restart: function () {
-					Game.main.flow.resume();
-					/*
 					if (status === 'splash') {
-						//we have inited and paused before the splash screen appeared
 						status = 'running';
 						Game.main.flow.resume();
 					} else {
 						status = 'running';
-						Game.main.engine.start();
+						Game.main.flow.resume();
+						//Game.main.engine.start();
+						//Game.main.init();
 					}
-					*/
 				},
 				pause: function () {
 					if (status === 'running') {
@@ -265,7 +262,7 @@ Game.main = function () {
 		}(),
 		engine: function () {
 			var constVars = {
-				TOTAL_DAYS: 40,
+				TOTAL_DAYS: 30,
 				MAX_HEALTH: 100,
 				MAX_FAME: 100,
 				MIN_GOODS: 4,
@@ -295,6 +292,7 @@ Game.main = function () {
 				},
 				depotGoods: [], // list of [object]
 				marketGoods: [], // list of goodsType
+				badGoodsList: [{goodsType: 2, fame: 1, tuto: true}, {goodsType: 6, fame: 5, tuto: true},]
 			};
 
 			// spec : spec.loc = 'market' or 'depot'
@@ -432,8 +430,8 @@ Game.main = function () {
 				document.getElementById('health').innerHTML = gameVars.player.health;
 				document.getElementById('fame').innerHTML = gameVars.player.fame;
 				document.getElementById('day_info').innerHTML = gameVars.player.days + '/' + constVars.TOTAL_DAYS;
-				document.getElementById('depot').innerHTML = gameVars.player.depotSize+ '/' + gameVars.player.depotCap;
-				document.getElementById('best_score').innerHTML = "来北京挣得最多的一次：<br><br>" + Game.cookie.get('bestScore');
+				document.getElementById('depot').innerHTML = "我的出租屋：" + gameVars.player.depotSize+ '/' + gameVars.player.depotCap;
+				document.getElementById('remain_loan').innerHTML = '急需借钱做生意赚钱，剩余借贷次数：<a style="color:#ff0000;">' + gameVars.player.remainLoan + '</a>';
 			}
 			var emptyRoom = function () {
 				return gameVars.player.depotCap - gameVars.player.depotSize;
@@ -449,7 +447,7 @@ Game.main = function () {
 			};
 			var checkGameOver = function () {
 				if (gameVars.player.health <= 0) {
-					Game.say.confirm("<h1>北漂小青年没有挣到钱，反而暴毙街头，太惨啦。这不能忍！再来一把吗？</h1>");
+					Game.say.replay("<h1>北漂小青年没有挣到钱，反而暴毙街头，太惨啦。这不能忍！再来一把吗？</h1>");
 				}
 				if (gameVars.player.days >= constVars.TOTAL_DAYS) {
 					Game.say.alert("<h1></h1>");
@@ -566,7 +564,7 @@ Game.main = function () {
 						return goods;
 					};
 					var evt = randomSelect(filter(events.goods, gameVars.marketGoods));
-					gameVars.goodsTable[evt.goodsType].price *= evt.eff;
+					gameVars.goodsTable[evt.goodsType].price = Math.floor(gameVars.goodsTable[evt.goodsType].price * evt.eff);
 					Game.say.alert("<h1>" + evt.msg + "</h1>");
 				} else {
 					if (gameVars.player.health < 30) {
@@ -575,11 +573,19 @@ Game.main = function () {
 						gameVars.player.cash = 0;
 					} else if (gameVars.player.fame < 20) {
 						Game.say.alert("<h1>俺现在臭名昭著，税务局多次上门找麻烦，花了50%的现金才搞定。</h1>");
-						gameVars.player.cash = Math.floor(gameVars.player.cash * 0.5);
+						gameVars.player.loan += Math.floor(gameVars.player.cash * 0.5);
 					}
 					console.log("Nothing happends");
 					Game.main.engine.updateStage();
 				}
+			};
+			var getTitle = function (score) {
+				for (x = 0; x < gameVars.rankList.length; x += 1) {
+					if (score >= gameVars.rankList[x].asset) {
+						return gameVars.rankList[x].name;
+					}
+				}
+				return "咋回事？";
 			};
 
 
@@ -596,8 +602,7 @@ Game.main = function () {
 					gameVars.player.depotSize = 0;
 					// beginning day
 					gameVars.player.days = 0;
-					// player can access loan twice
-					gameVars.player.remainLoan = 2;
+					gameVars.player.remainLoan = 5;
 					// click ads to make money
 					gameVars.player.remainAds = 3;
 
@@ -610,17 +615,21 @@ Game.main = function () {
 					if (Game.cookie.get('bestScore') === '') {
 						Game.cookie.set('bestScore', 0);
 					}
-					gameVars.rankList = [{name: "钻石王老五", asset: 10000000},
-						{name: "京城名富", asset: 5000000},
-						{name: "富甲一方", asset: 2500000},
-						{name: "万贯家产", asset: 1000000},
-						{name: "小富翁", asset: 500000},
-						{name: "远近闻名", asset: 400000},
-						{name: "小有成就", asset: 300000},
-						{name: "小康之家", asset: 200000},
-						{name: "低保家庭", asset: 0},
-						{name: "大负翁", asset: -10000000},
+					gameVars.rankList = [{name: "HOLY SHIT! 1st", asset: 100000000},
+						{name: "钻石王老五 2nd", asset: 10000000},
+						{name: "京城名富 3rd", asset: 5000000},
+						{name: "富甲一方 4th", asset: 2500000},
+						{name: "万贯家产 5th", asset: 1000000},
+						{name: "小富翁 6th", asset: 500000},
+						{name: "远近闻名 7th", asset: 400000},
+						{name: "小有成就 8th", asset: 300000},
+						{name: "小康之家 9th", asset: 200000},
+						{name: "低保家庭 -_-||", asset: 0},
+						{name: "有潜力的新手 :)", asset: -10000000},
 						];
+					document.getElementById('best_score').innerHTML = "俺来北京最多一次挣了：<br>$" + Game.cookie.get('bestScore') + "<br>获得称号：" + 
+						getTitle(parseInt(Game.cookie.get('bestScore'), 10)) + "<br>";
+
 				},
 				setDealAmount: function (number) {
 					gameVars.deal.amount = parseInt(number, 10); 
@@ -664,7 +673,7 @@ Game.main = function () {
 						}
 						dealInfo.maxAmount = Math.min(dealInfo.maxAmount, emptyRoom());
 						if (dealInfo.maxAmount === 0) {
-							Game.say.alert('<h1>虽然现在买不起' + dealInfo.goodsName + '，但是俺以前一口气可以买100个！<h1>');
+							Game.say.alert('<h1>现在买不起' + dealInfo.goodsName + '，不妨去银行借钱买：）<h1>');
 							return ;
 						}
 					} else if (dealInfo.opr === 'sell') {
@@ -703,13 +712,13 @@ Game.main = function () {
 							return ;
 						}
 					} else if (dealInfo.opr === 'loan') {
-						if (gameVars.player.fame <= 50 || gameVars.player.remainLoan === 0) {
-							Game.say.alert("<h1>您的声誉不够高(>50)或者贷款次数(2次)用光啦！</h1>");
+						if (gameVars.player.fame <= 40 || gameVars.player.remainLoan === 0) {
+							Game.say.alert("<h1>您的声誉不够高(>40)或者贷款次数(5次)用光啦！</h1>");
 							return ;
 						}
-						dealInfo.maxAmount = (gameVars.player.fame - 50) * 1000; // a formula
+						dealInfo.maxAmount = Math.floor((gameVars.player.fame - 40) * 100 * Math.log(1 + gameVars.player.days)); // a formula
 					} else if (dealInfo.opr === 'cure') {
-						var cost = Math.floor((gameVars.player.cash + gameVars.player.savings) * 0.001) + 35000;
+						var cost = Math.floor(3500 * Math.log(1 + gameVars.player.days));
 						dealInfo.maxAmount = Math.floor(gameVars.player.cash / cost);
 						dealInfo.cost = cost;
 						gameVars.deal.cost = cost;
@@ -723,26 +732,26 @@ Game.main = function () {
 							return ;
 						}
 					} else if (dealInfo.opr === 'donate') {
-						var cost = Math.floor((gameVars.player.cash + gameVars.player.savings) * 0.001) + 50000;
+						var cost = gameVars.player.fame * 500;
 						dealInfo.maxAmount = Math.floor(gameVars.player.cash / cost);
 						dealInfo.cost = cost;
 						gameVars.deal.cost = cost;
-						if (gameVars.player.fame === 99) {
+						if (gameVars.player.fame >= 99) {
 							Game.say.alert("<h1>热烈欢迎德高望重的爷莅临慈善机构！</h1>");
 							return ;
 						}
 						dealInfo.maxAmount = Math.min(dealInfo.maxAmount, 99 - gameVars.player.fame);
 						if (dealInfo.maxAmount === 0) {
-							Game.say.alert("<h1>就你那么穷，没5000块钱还想做慈善！</h1>");
+							Game.say.alert("<h1>就你那么穷，没钱还想做慈善！哪凉快哪呆着去。</h1>");
 							return ;
 						}
 					} else if (dealInfo.opr === 'rent') {
-						var cost = Math.floor((gameVars.player.cash + gameVars.player.savings) * 0.005) + 10000;
+						var cost = (gameVars.depotCap - 100 + 10) * 2000;
 						dealInfo.maxAmount = Math.floor(gameVars.player.cash / cost);
 						dealInfo.cost = cost;
 						gameVars.deal.cost = cost;
 						if (dealInfo.maxAmount === 0) {
-							Game.say.alert("<h1>没4万块钱还想租房子，住下水道去吧。</h1>");
+							Game.say.alert("<h1>没钱还想租房子?!住下水道去吧。</h1>");
 							return ;
 						}
 					}
@@ -789,8 +798,23 @@ Game.main = function () {
 						gameVars.player.cash += dealInfo.amount * goods.price * (discount === true ? 0.5 : 1);
 						gameVars.player.depotSize -= dealInfo.amount;
 
-						// TODO(xu.he): trigger events
+						for (x = 0; x < gameVars.badGoodsList.length; x += 1) {
+							console.log(x);
+							if (gameVars.badGoodsList[x].goodsType === dealInfo.goodsType) {
+								gameVars.player.fame -= gameVars.badGoodsList[x].fame;
 
+								if (gameVars.badGoodsList[x].tuto === true) {
+									console.log(gameVars.badGoodsList[x]);
+									console.log(gameVars.badGoodsList[x]);
+									console.log(gameVars.badGoodsList[x]);
+									Game.say.alert("<h1>温馨提示：倒卖" + gameVars.goodsTable[dealInfo.goodsType].name + "危害社会。俺的名声降低了" + gameVars.badGoodsList[x].fame + "点。</h1>");
+									console.log(gameVars.badGoodsList[x]);
+									console.log(gameVars.badGoodsList[x]);
+									console.log(gameVars.badGoodsList[x].fame);
+									gameVars.badGoodsList[x].tuto = false;
+								}
+							}
+						}
 
 						for (x = 0; x < gameVars.depotGoods.length; x += 1) {
 							if (gameVars.depotGoods[x].goodsType === dealInfo.goodsType) {
@@ -867,23 +891,35 @@ Game.main = function () {
 				society: function(type) {
 					Game.main.engine.order({opr:type, goodsType:0});
 				},
+				restart: function() {
+					Game.say.confirm("<h1>你真的混不下去了吗？温馨提示：要趁没人的时候才可以跳楼哦:)</h1>");
+				},
+				ads: function() {
+					if (gameVars.player.remainAds === 0) {
+						Game.say.alert("<h1>不要天天上网了，快去挣大钱！</h1>");
+					} else {
+						var adsFee = Math.floor(Math.random() * 10 + 3);
+						gameVars.player.cash += adsFee;
+						gameVars.player.remainAds -= 1;
+						var newGameUrl = "http://research.renren.com/cilifang.html";
+						Game.say.alert("<h2>喜欢这个游戏吗？请期待人人网更牛逼的大型的交易游戏，和好友一起买卖东西，体验当大款的乐趣!<br><a href="
+								+ newGameUrl + " target='_blank'>去看看</a></h2><br><h2>获得了$" + adsFee + "广告费。</h2>");
+						Game.main.engine.updateStage();
+					}
+				},
+				about: function () {
+					Game.say.alert("<h1>根据Guoly Computing公司的游戏“北京浮生记”改编。作者联系邮箱：phoenix817@126.com</h1>");
+				},
 				gameover: function () {
 					var asset = gameVars.player.cash + gameVars.player.savings - gameVars.player.loan;
 					var best = parseInt(Game.cookie.get('bestScore'), 10);
 					if (asset > best) Game.cookie.set('bestScore', asset);
 					var x;
 					console.log("Best Score : " + best);
-					var msg = "在北京最后一天了，系统自动帮俺卖掉剩下的货物" + "<br><br>";
+					var msg = "在北京最后一天了，系统自动帮俺卖掉剩下的货物" + "<br>";
 					msg = msg + "俺一供赚了" + asset + "钱" + "<br>";
-					for (x = 0; x < gameVars.rankList.length; x += 1) {
-						if (asset >= gameVars.rankList[x].asset) {
-							msg = msg + "获得称号：" + gameVars.rankList[x].name + "<br><br>";
-							break;
-						}
-					}
-					msg = msg + "重新在玩一把吗？";
-					Game.say.alert("<h1>" + msg + "</h1>");
-					Game.main.engine.start();
+					msg = msg + "获得称号：" + getTitle(asset) + "<br>重新再玩一把吗？";
+					Game.say.replay("<h1>" + msg + "</h1>");
 				}
 			};
 		}()

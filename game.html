@@ -11,7 +11,10 @@
 	<script type="text/javascript" src="js/game_engine.js"></script>
 </head>
 
-<body>
+<body style='-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;' 
+unselectable='on'
+onselectstart='return false;' 
+onmousedown='return false;'>
 
 <div id="container">
 
@@ -19,39 +22,6 @@
 		<div class="alertbox_board"></div>
 		<div id="alertbox_content"></div>
 	</div>
-
-<!--
-	<div id="inputter" sytle="opacity=0">
-		<div id="inputter_content">
-			<input type="text" id="digital_content" style="width:160px; height:20px; color:#66ff33;"/>
-			<br>
-			<button class="inputter_button" onclick="input(this, 'add');">1</button>
-			<button class="inputter_button" onclick="input(this, 'add');">2</button>
-			<button class="inputter_button" onclick="input(this, 'add');">3</button>
-			<button class="inputter_button" onclick="input(this, 'mul');">50%</button>
-			<br>
-			<button class="inputter_button" onclick="input(this, 'add');">4</button>
-			<button class="inputter_button" onclick="input(this, 'add');">5</button>
-			<button class="inputter_button" onclick="input(this, 'add');">6</button>
-			<button class="inputter_button" onclick="input(this, 'mul');">25%</button>
-			<br>
-			<button class="inputter_button" onclick="input(this, 'add');">8</button>
-			<button class="inputter_button" onclick="input(this, 'add');">9</button>
-			<button class="inputter_button" onclick="input(this, 'add');">0</button>
-			<button class="inputter_button" onclick="input(this, 'inc');">+1</button>
-			<br>
-			<button class="inputter_button" onclick="input(this, 'clr');">C</button>
-			<button class="inputter_button" onclick="input(this, 'add');">0</button>
-			<button class="inputter_button" onclick="input(this, 'del');">&lt;</button>
-			<button class="inputter_button" onclick="input(this, 'dec');">-1</button>
-			<br>
-			<br>
-			<a href="#" onclick="Game.say.dismiss(); Game.flow.resume(); Game.main.engine.deal(); return false;"><img src="i/ok.png" alt="Yes" /></a>
-			<a href="#" onclick="Game.say.dismiss(); Game.flow.resume(); return false;"><img src="i/cancel.png" alt="Cancel" /></a>
-		</div>
-
-	</div>
--->
 
 	<div id="places_menu">
 		<a id="button_market" href="#market" onclick="return Game.places.set('market');"><span></span>黑市</a>
@@ -65,13 +35,12 @@
 			<!--trading place//-->
 			<div id="ibox_market" class="iboxcontent">
 				<div id="market_table">
-					<div>今日黑市:</div>
+					<div style="text-align:center;">今日黑市:</div>
 					<div class="goods_table" id="market_goods"></div>
 				</div>
 
 				<div id="depot_table">
-					<div>我的出租屋:&nbsp;</div>
-					<div id="depot"></div>
+					<div id="depot" style="width:140px;text-align:center;"></div>
 					<div class="goods_table" id="depot_goods"></div>
 				</div>
 			</div>
@@ -80,56 +49,96 @@
 			<div id="ibox_bank" class="iboxcontent">
 				<h3 style="text-align:center;">俺到了北京最大的银行...</h3>
 				<div id="bank_counter">
-					<div id="save_money" class="business" onclick="Game.main.engine.bank('save');">存钱</div>
-					<div id="withdraw_money" class="business" onclick="Game.main.engine.bank('withdraw');">取钱</div>
-					<div id="repay_money" class="business" onclick="Game.main.engine.bank('repay');">还钱</div>
-					<div id="apply_loan" class="business" onclick="Game.main.engine.bank('loan');">借钱</div>
+					<div class='box' style="background-color:#adc3c0;" onclick="Game.main.engine.bank('save');">
+						<div id="save_money" class="business" >存钱</div>
+						<div class='explanation'>把钱存到银行里有利息，更安全</div>
+					</div>
+
+					<div class='box' style="background-color:#93e0ff;"onclick="Game.main.engine.bank('withdraw');">
+						<div id="withdraw_money" class="business">取钱</div>
+						<div class='explanation'>感谢国家政策，取钱不需要手续费</div>
+					</div>
+
+					<div class='box' style="background-color:#5ca7ba;"onclick="Game.main.engine.bank('repay');">
+						<div id="repay_money" class="business">还钱</div>
+						<div class='explanation'>有钱及时还，保证俺的名声</div>
+					</div>
+
+					<div class='box' style="background-color:#afd7ed;"onclick="Game.main.engine.bank('loan');">
+						<div id="apply_loan" class="business">借钱</div>
+						<div id="remain_loan" class='explanation'>急需借钱做生意赚钱，剩余借贷次数：</div>
+					</div>
 				</div>
 			</div>
 
 			<!--buy health fame and house//-->
 			<div id="ibox_society" class="iboxcontent">
 				<h3 style="text-align:center">这个社会有点不友善...</h3>
-				<div id="hospital" class="business" onclick="Game.main.engine.society('cure');">医院</div>
-				<div id="charity" class="business" onclick="Game.main.engine.society('donate');">慈善机构</div>
-				<div id="broker" class="business" onclick="Game.main.engine.society('rent');">房子中介</div>
+				<div class='box' style="background-color:#ff425d;" onclick="Game.main.engine.society('cure');">
+					<div id="hospital" class="business">医院</div>
+					<div class='explanation'>保持身体健康，省的没挣到钱人还没了</div>
+				</div>
+
+				<div class='box' style="background-color:#3ebcca;" onclick="Game.main.engine.society('donate');">
+					<div id="charity" class="business">慈善机构</div>
+					<div class='explanation'>更好的名声可以借贷更多的钱</div>
+				</div>
+				<div class='box' style="background-color:#aedd81;" onclick="Game.main.engine.society('rent');">
+					<div id="broker" class="business">房子中介</div>
+					<div class='explanation'>想发财?一个大仓库是必要的</div>
+				</div>
+				<div class='box' style="background-color:#899dc0;" onclick="Game.main.engine.restart();">
+					<div id="restart" class="business">央视大楼</div>
+					<div class='explanation'>混不下去啦！不能忍，俺要重新投胎！</div>
+				</div>
+
 			</div>
 		
 			<!--about us//-->
 			<div id="ibox_netbar" class="iboxcontent">
-				<h3>网吧不要钱！</h3>
-				<div id="best_score"></div>
+				<h3 style="text-align:center">网吧不要钱！还可以挣广告费，嘿嘿，好开心。</h3>
+				<div id="best_score" style="background-color:#014d67;"></div>
+
+				<div class='box' style="background-color:#608f9f;" onclick="Game.main.engine.ads();">
+					<div class="business">广告</div>
+					<div class='explanation'>点击挣广告费</div>
+				</div>
+				<div class='box' style="background-color:#fbb271;" onclick="Game.main.engine.about();">
+					<div class="business">关于</div>
+					<div class='explanation'>关于游戏、作者</div>
+				</div>
+
 			</div>
 		</div>
 		<!--player status //-->
 		<div id="player_contents">
 			<div class="iboxcontent" id="player_status">
-				<div class="status" id="cash_info">
+				<div class="status" id="cash_info" style="width:130px;">
 					<div>现金</div>
-					<div class="dbg1" id="cash"></div>
+					<div class="dbg" id="cash" style="width:90px;"></div>
 				</div>
-				<div class="status_small" id="health_info">
+				<div class="status" id="health_info" style="width:75px;">
 					<div>健康</div>
-					<div class="dbg2" id="health"></div>
+					<div class="dbg" id="health" style="width:35px;"></div>
 				</div>
-				<div class="status" id="savings_info">
+				<div class="status" id="savings_info" style="width:130px;">
 					<div>存款</div>
-					<div class="dbg1" id="savings"></div>
+					<div class="dbg" id="savings" style="width:90px;"></div>
 				</div>
-				<div class="status_small" id="fame_info">
+				<div class="status" id="fame_info" style="width:75px;">
 					<div >名声</div>
-					<div class="dbg2" id="fame"></div>
+					<div class="dbg" id="fame" style="width:35px;"></div>
 				</div>
-				<div class="status" id="loan_info">
+				<div class="status" id="loan_info" style="width:130px;">
 					<div>欠款</div>
-					<div class="dbg1" id="loan"></div>
+					<div class="dbg" id="loan" style="width:90px;"></div>
 				</div>
 			</div>
 
 			<div class="status" id="next_day" onclick="return Game.main.engine.newDay();">
-				<div>下一天</div>
+				<div style="margin:5px;">下一天</div>
 				<br><br>
-				<div id=day_info>0/40</div>
+				<div id=day_info style="margin:0px 15px;">0/40</div>
 			</div>
 		</div>
 

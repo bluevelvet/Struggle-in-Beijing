@@ -2,13 +2,13 @@ html {
 	overflow:hidden;
 }
 body {
-     font-family: helvetica, arial;
+     font-family: fantasy;
      background-color: #000000;
-     color: #a3b3c3;
+     color: #000000;
      border:0;
      padding:0;
      margin:0;
-     font-size:11px;
+     font-size:12px;
      overflow:hidden;
      width: 320px;
      margin: auto;
@@ -54,7 +54,7 @@ img {
 	width:320px;
 	height:315px;
 	overflow:hidden;
-	background-color: #aaaaaa;
+	background-color: #7f858b;
 	margin:auto;
 }
 
@@ -86,33 +86,30 @@ img {
 .status div {
 	float:left;
 	font-weight:bold;
-	color:#ffffff;
-	font-size: 13px;
+	font-size: 16px;
 }
 
-.status_small div {
-	float:left;
-	font-weight:bold;
-	color:#ffffff;
-	font-size: 13px;
-}
 #market_table {
 	height:216px;
 	color:#ffffff;
 	float:left;
 }
 .goods_table {
-	width:140px;
-	height:216px;
+	width:146px;
+	height:220px;
 	float:left;
-	margin:2px 5px;
-	background-image:url(../i/goods.png);
+	margin:0px 6px;
+	background-image:url(../i/goods.png); 
 }
 .goods {
-	height:20px;
+	height:27px;
 	display:block;
 	position:absolute;
-	font-size:13px;
+	font-size:14px;
+	margin-top: 3px;
+	font-weight:bold;
+/*	color:#f74461; */
+	color:#000000;
 }
 #depot_table {
 	width:150px;
@@ -123,30 +120,13 @@ img {
 #depot_table div{
 	float:left;
 }
-.dbg1{
-	width:100px;
+.dbg{
 	height:18px;
 	margin:0px 2px;
-	background-image:url(../i/digit_bg_big.png);
+	background-color:#000000;
+	text-align:center;
+	/*background-image:url(../i/digit_bg_big.png); */
 }
-.dbg2{
-	width:30px;
-	height:18px;
-	margin:0px 2px;
-	background-image:url(../i/digit_bg_small.png);
-}
-
-.status_digit_small {
-	width:100px;
-	height:18px;
-	margin:0px 2px;
-	text-align:right;
-	font-weight:bold;
-	color:#ffffff;
-	font-size: 11px;
-	background-image:url(../i/digit_bg_big.png);
-}
-
 
 #place_contents {
 	width:10000px;
@@ -210,7 +190,7 @@ img {
 	width:225px;
 	height:60px;
 	margin:2px 7px;
-	background-image:url(../i/status.png);
+/*	background-image:url(../i/status.png);*/
 }
 
 #next_day {
@@ -218,7 +198,7 @@ img {
 	height:60px;
 	margin:2px 7px;
 	text-align:center;
-	background-image:url(../i/next_day.png);
+	background-image:url(../i/next_day.png); 
 }
 
 #places_menu a {
@@ -387,10 +367,12 @@ img {
 }
 
 .business {
-	font-size:36px;
-	color:#ffffff;
+	width:120px;
+	font-size:24px;
+	color:#000000;
 	display:block;
 	cursor:pointer;
+	float:left;
 	text-align:center;
 }
 #cash {
@@ -402,6 +384,9 @@ img {
 #fame {
 	color:#33ccff;
 }
+#health {
+	color:#ffcc00;
+}
 #savings {
 	color:#00ff33;
 }
@@ -409,4 +394,19 @@ img {
 	color:#ffffff;
 	font-size: 24px;
 	text-align: center;
+}
+.explanation {
+	float:left;
+	width:160px;
+	height:45px;
+	text-align: center;
+	font-size:15px;
+	margin:2px;
+	background-color:#fae731;
+	color:#000000;
+}
+.box {
+	width:320px;
+	height:50px;
+/*	background-color:#aedd81; */
 }
