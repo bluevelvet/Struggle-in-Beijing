@@ -8,7 +8,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="apple-touch-icon-precomposed" href="i/icon.png"/>
 	<link rel="apple-touch-startup-image" href="i/loader.png">
-	<script type="text/javascript" src="js/game_engine.js"></script>
+	<script type="text/javascript" src="js/compiled_game.js"></script>
 </head>
 
 <body style='-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;' 
@@ -54,7 +54,7 @@ onmousedown='return false;'>
 						<div class='explanation'>把钱存到银行里有利息，更安全</div>
 					</div>
 
-					<div class='box' style="background-color:#93e0ff;"onclick="Game.main.engine.bank('withdraw');">
+					<div class='box' style="background-color:#afd7ed;"onclick="Game.main.engine.bank('withdraw');">
 						<div id="withdraw_money" class="business">取钱</div>
 						<div class='explanation'>感谢国家政策，取钱不需要手续费</div>
 					</div>
@@ -64,7 +64,7 @@ onmousedown='return false;'>
 						<div class='explanation'>有钱及时还，保证俺的名声</div>
 					</div>
 
-					<div class='box' style="background-color:#afd7ed;"onclick="Game.main.engine.bank('loan');">
+					<div class='box' style="background-color:#93e0ff;"onclick="Game.main.engine.bank('loan');">
 						<div id="apply_loan" class="business">借钱</div>
 						<div id="remain_loan" class='explanation'>急需借钱做生意赚钱，剩余借贷次数：</div>
 					</div>
@@ -74,20 +74,20 @@ onmousedown='return false;'>
 			<!--buy health fame and house//-->
 			<div id="ibox_society" class="iboxcontent">
 				<h3 style="text-align:center">这个社会有点不友善...</h3>
-				<div class='box' style="background-color:#ff425d;" onclick="Game.main.engine.society('cure');">
+				<div class='box' style="background-color:#adc3c0;" onclick="Game.main.engine.society('cure');">
 					<div id="hospital" class="business">医院</div>
 					<div class='explanation'>保持身体健康，省的没挣到钱人还没了</div>
 				</div>
 
-				<div class='box' style="background-color:#3ebcca;" onclick="Game.main.engine.society('donate');">
+				<div class='box' style="background-color:#afd7ed;" onclick="Game.main.engine.society('donate');">
 					<div id="charity" class="business">慈善机构</div>
 					<div class='explanation'>更好的名声可以借贷更多的钱</div>
 				</div>
-				<div class='box' style="background-color:#aedd81;" onclick="Game.main.engine.society('rent');">
+				<div class='box' style="background-color:#5ca7ba;" onclick="Game.main.engine.society('rent');">
 					<div id="broker" class="business">房子中介</div>
 					<div class='explanation'>想发财?一个大仓库是必要的</div>
 				</div>
-				<div class='box' style="background-color:#899dc0;" onclick="Game.main.engine.restart();">
+				<div class='box' style="background-color:#93e0ff;" onclick="Game.main.engine.restart();">
 					<div id="restart" class="business">央视大楼</div>
 					<div class='explanation'>混不下去啦！不能忍，俺要重新投胎！</div>
 				</div>
@@ -97,13 +97,13 @@ onmousedown='return false;'>
 			<!--about us//-->
 			<div id="ibox_netbar" class="iboxcontent">
 				<h3 style="text-align:center">网吧不要钱！还可以挣广告费，嘿嘿，好开心。</h3>
-				<div id="best_score" style="background-color:#014d67;"></div>
+				<div id="best_score" style="background-color:#adc3c0;"></div>
 
-				<div class='box' style="background-color:#608f9f;" onclick="Game.main.engine.ads();">
+				<div class='box' style="background-color:#afd7ed;" onclick="Game.main.engine.ads();">
 					<div class="business">广告</div>
 					<div class='explanation'>点击挣广告费</div>
 				</div>
-				<div class='box' style="background-color:#fbb271;" onclick="Game.main.engine.about();">
+				<div class='box' style="background-color:#5ca7ba;" onclick="Game.main.engine.about();">
 					<div class="business">关于</div>
 					<div class='explanation'>关于游戏、作者</div>
 				</div>
